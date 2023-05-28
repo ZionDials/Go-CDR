@@ -16,6 +16,17 @@ go-cdr --directory "C:\CDR" --cdr_type (cucm|cube) --config "config.yaml"
 * Only supports CDR/CMR files in CSV format
 * Will parse directories in single-threaded mode, i.e. one directory at a time
 
+## Cisco CUBE Gateway Configuration
+
+``` bash
+gw-accounting file
+ primary ftp (IP Address of FTP Server)/ username (username for FTP) password (password for FTP)
+ acct-template callhistory-detail
+ maximum buffer-size  40
+ maximum fileclose-timer 60
+ maximum cdrflush-timer 45
+```
+
 ## Example Config
 
 ``` yaml
