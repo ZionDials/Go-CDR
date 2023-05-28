@@ -19,4 +19,8 @@ var (
 
 	// ConvertStringToInt64
 	stringToIntReg = regexp.MustCompile("[^0-9]+")
+
+	// ParseCUCMCDRs
+	CMRReg = regexp.MustCompile(`^cmr_.*`)
+	CDRReg = regexp.MustCompile(`^cdr_.*`)
 )

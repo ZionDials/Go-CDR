@@ -27,7 +27,7 @@ func ParseFiles(inputDirectory, fileType string) {
 	// Get a list of files in the input directory
 	files, err := os.ReadDir(inputDirectory)
 	if err != nil {
-		logger.Error("Error reading directory: %s Error: %s\n", inputDirectory, err)
+		logger.Error("Error reading directory: %s Error: %s", inputDirectory, err)
 		os.Exit(1)
 	}
 
@@ -39,7 +39,7 @@ func ParseFiles(inputDirectory, fileType string) {
 
 	// writeFile, err := os.OpenFile(OutputFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, os.ModePerm)
 	// if err != nil {
-	//	logger.Error("Error opening file: %s Error: %s\n", OutputFile, err)
+	//	logger.Error("Error opening file: %s Error: %s", OutputFile, err)
 	// }
 	// defer writeFile.Close()
 
@@ -57,7 +57,7 @@ func ParseFiles(inputDirectory, fileType string) {
 				ParseCUCMCDRs(fullFilePath, db)
 			default:
 				// Failed to match a file type
-				logger.Error("Failed to match file type: %s\n", fileType)
+				logger.Error("Failed to match file type: %s", fileType)
 				os.Exit(1)
 
 			}

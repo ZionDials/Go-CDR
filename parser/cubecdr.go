@@ -29,11 +29,11 @@ import (
 
 func ParseCubeCDRFile(inputFile string) ([]*models.CubeCDR, error) {
 
-	logger.Info("Parsing file: %s\n", inputFile)
+	logger.Info("Parsing file: %s", inputFile)
 
 	readFile, err := os.OpenFile(inputFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, os.ModePerm)
 	if err != nil {
-		logger.Error("Error opening file: %s Error: %s\n", inputFile, err)
+		logger.Error("Error opening file: %s Error: %s", inputFile, err)
 	}
 	defer readFile.Close()
 
@@ -49,7 +49,7 @@ func ParseCubeCDRFile(inputFile string) ([]*models.CubeCDR, error) {
 	Hostname := strings.Split(baseFileName, ".")[1]
 	FileTimestamp := strings.ReplaceAll(strings.Split(baseFileName, ".")[2]+"."+strings.Split(baseFileName, ".")[3], "_", " ")
 
-	logger.Info("Parsing Gateway %s CDR file\n", Hostname)
+	logger.Info("Parsing Gateway %s CDR file", Hostname)
 
 	rawcdrs := []*models.RawCubeCDR{}
 	parsedCDRs := []*models.CubeCDR{}
@@ -58,14 +58,14 @@ func ParseCubeCDRFile(inputFile string) ([]*models.CubeCDR, error) {
 	for {
 		record, err := reader.Read()
 		if err == io.EOF {
-			logger.Info("Finished parsing file: %s\n", inputFile)
+			logger.Info("Finished parsing file: %s", inputFile)
 			break
 		}
 		if err != nil {
 			if perr, ok := err.(*csv.ParseError); ok && perr.Err == csv.ErrFieldCount {
 				continue
 			}
-			logger.Error("Error parsing file: %s Error: %s\n", inputFile, err)
+			logger.Error("Error parsing file: %s Error: %s", inputFile, err)
 		}
 
 		if len(record) >= 129 {

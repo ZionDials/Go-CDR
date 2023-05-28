@@ -31,7 +31,7 @@ func ParseCUBECDRs(inputFile string, db *database.DataService) {
 	logger.Info("Found CDR file: %s", baseFileName)
 	cdrs, err := ParseCubeCDRFile(inputFile)
 	if err != nil {
-		logger.Error("Error parsing file: %s Error: %s\n", inputFile, err)
+		logger.Error("Error parsing file: %s Error: %s", inputFile, err)
 		helpers.ChangeFileNameToFailedAndMove(inputFile)
 	}
 
@@ -54,6 +54,22 @@ func ParseCUBECDRs(inputFile string, db *database.DataService) {
 			} else {
 				logger.Info("Successfully moved file to completed directory: %s", inputFile)
 			}
+		}
+	} else if len(cdrs) == 0 && err == nil {
+		logger.Info("No CDRs found in file: %s", inputFile)
+		err := helpers.ChangeFileNameToCompleteAndMove(inputFile)
+		if err != nil {
+			logger.Error("Error while moving file: %s", err.Error())
+		} else {
+			logger.Info("Successfully moved file to completed directory: %s", inputFile)
+		}
+	} else {
+		logger.Error("Error parsing file: %s Error: %s", inputFile, err)
+		err := helpers.ChangeFileNameToFailedAndMove(inputFile)
+		if err != nil {
+			logger.Error("Error while moving file: %s", err.Error())
+		} else {
+			logger.Info("Successfully moved file to failed directory: %s", inputFile)
 		}
 	}
 

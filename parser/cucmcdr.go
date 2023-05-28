@@ -30,11 +30,11 @@ import (
 
 func ParseCucmCDRFile(inputFile string) ([]*models.CucmCdr, error) {
 
-	logger.Info("Parsing file: %s\n", inputFile)
+	logger.Info("Parsing file: %s", inputFile)
 
 	readFile, err := os.OpenFile(inputFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, os.ModePerm)
 	if err != nil {
-		logger.Error("Error opening file: %s Error: %s\n", inputFile, err)
+		logger.Error("Error opening file: %s Error: %s", inputFile, err)
 	}
 	defer readFile.Close()
 
@@ -46,11 +46,11 @@ func ParseCucmCDRFile(inputFile string) ([]*models.CucmCdr, error) {
 	FilenameNodeID := ParsedFilename[2]
 	FilenameDateTime, err := helpers.ParseCUCMFilenameTimestamp(ParsedFilename[3])
 	if err != nil {
-		logger.Error("Error parsing file date time: %s Error: %s\n", inputFile, err)
+		logger.Error("Error parsing file date time: %s Error: %s", inputFile, err)
 	}
 	FilenameSequence, err := helpers.ConvertStringToInt64(&ParsedFilename[4])
 	if err != nil {
-		logger.Error("Error parsing file sequence: %s Error: %s\n", inputFile, err)
+		logger.Error("Error parsing file sequence: %s Error: %s", inputFile, err)
 	}
 
 	rawcdrs := []*models.RawCucmCdr{}
@@ -63,14 +63,14 @@ func ParseCucmCDRFile(inputFile string) ([]*models.CucmCdr, error) {
 		lineCount++
 		record, err := reader.Read()
 		if err == io.EOF {
-			logger.Info("Finished parsing file: %s\n", inputFile)
+			logger.Info("Finished parsing file: %s", inputFile)
 			break
 		}
 		if err != nil {
 			if perr, ok := err.(*csv.ParseError); ok && perr.Err == csv.ErrFieldCount {
 				continue
 			}
-			logger.Error("Error parsing file: %s Error: %s\n", inputFile, err)
+			logger.Error("Error parsing file: %s Error: %s", inputFile, err)
 		}
 
 		if len(record) == 133 && lineCount > 2 {

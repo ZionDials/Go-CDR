@@ -23,6 +23,7 @@ database:
   autoMigrate: true # Migrate the database schema on startup
   database: cdr # Database name
   driver: postgres # Database driver (mysql|mssql|postgres|sqlite)
+  host: localhost # Database host
   limit: 100 # Maximum number of records to insert in bulk
   password: 012345abc # Database password
   path: ./go_cdr.db # Path to the database file (sqlite only)
