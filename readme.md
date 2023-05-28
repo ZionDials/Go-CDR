@@ -16,15 +16,15 @@ go-cdr --directory "C:\CDR" --cdr_type (cucm|cube) --config "config.yaml"
 * Only supports CDR/CMR files in CSV format
 * Will parse directories in single-threaded mode, i.e. one directory at a time
 
-## Cisco CUBE Gateway Configuration
+## Cisco UBE Gateway Configuration
 
-``` bash
+```
 gw-accounting file
  primary ftp (IP Address of FTP Server)/ username (username for FTP) password (password for FTP)
  acct-template callhistory-detail
- maximum buffer-size  40
- maximum fileclose-timer 60
- maximum cdrflush-timer 45
+ maximum buffer-size  40 ! kbytes —Maximum buffer size, in kilobytes. Range: 6 to 40. Default: 20.
+ maximum fileclose-timer 60 ! minutes —Maximum time, in minutes, to write records to an accounting file. Range: 60 to 1,440. Default: 1,440 (24 hours).
+ maximum cdrflush-timer 45 ! minutes —Maximum time, in minutes, to hold call records in the accounting buffer. Range: 1 to 1,435. Default: 60 (1 hour).
 ```
 
 ## Example Config
