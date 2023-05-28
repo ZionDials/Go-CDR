@@ -23,7 +23,7 @@ import (
 	"github.com/ziondials/go-cdr/logger"
 )
 
-func ParseFiles(inputDirectory, fileType string) {
+func ParseFiles(inputDirectory string, outputDirectory string, fileType string, deleteOriginal bool) {
 	// Get a list of files in the input directory
 	files, err := os.ReadDir(inputDirectory)
 	if err != nil {
@@ -52,9 +52,9 @@ func ParseFiles(inputDirectory, fileType string) {
 			fullFilePath := filepath.Join(inputDirectory, file.Name())
 			switch fileType {
 			case "cube":
-				ParseCUBECDRs(fullFilePath, db)
+				ParseCUBECDRs(fullFilePath, db, outputDirectory, deleteOriginal)
 			case "cucm":
-				ParseCUCMCDRs(fullFilePath, db)
+				ParseCUCMCDRs(fullFilePath, db, outputDirectory, deleteOriginal)
 			default:
 				// Failed to match a file type
 				logger.Error("Failed to match file type: %s", fileType)

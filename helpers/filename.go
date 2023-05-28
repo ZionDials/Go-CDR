@@ -39,32 +39,41 @@ func ParseCUCMFilenameTimestamp(input string) (*int64, error) {
 	return &ts, nil
 }
 
-func ChangeFileNameToCompleteAndMove(input string) error {
-	OGPath := filepath.Dir(input)
+func ChangeFileNameToCompleteAndMoveOrDelete(input string, output string, delete bool) error {
+	OutputPath := filepath.Dir(output)
 	baseFileName := filepath.Base(input)
-	completedFilePath := filepath.Join(OGPath, "complete")
+	completedFilePath := filepath.Join(OutputPath, "complete")
+	if delete {
+		err := os.Remove(input)
+		if err != nil {
+			logger.Error(err.Error())
+		} else {
+			logger.Info("Deleted file: %s", input)
+		}
+		return err
+	}
 	if _, err := os.Stat(completedFilePath); errors.Is(err, os.ErrNotExist) {
 		err := os.Mkdir(completedFilePath, os.ModePerm)
 		if err != nil {
 			logger.Error(err.Error())
 		}
 	}
-	NewPath := filepath.Join(OGPath, "complete", (baseFileName + ".complete"))
+	NewPath := filepath.Join(OutputPath, "complete", (baseFileName + ".complete"))
 	err := os.Rename(input, NewPath)
 	return err
 }
 
-func ChangeFileNameToFailedAndMove(input string) error {
-	OGPath := filepath.Dir(input)
+func ChangeFileNameToFailedAndMove(input, output string) error {
+	OutputPath := filepath.Dir(output)
 	baseFileName := filepath.Base(input)
-	failedFilePath := filepath.Join(OGPath, "failed")
+	failedFilePath := filepath.Join(OutputPath, "failed")
 	if _, err := os.Stat(failedFilePath); errors.Is(err, os.ErrNotExist) {
 		err := os.Mkdir(failedFilePath, os.ModePerm)
 		if err != nil {
 			logger.Error(err.Error())
 		}
 	}
-	NewPath := filepath.Join(OGPath, "failed", (baseFileName + ".failed"))
+	NewPath := filepath.Join(OutputPath, "failed", (baseFileName + ".failed"))
 	err := os.Rename(input, NewPath)
 	return err
 }

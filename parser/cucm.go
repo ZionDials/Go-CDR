@@ -24,7 +24,7 @@ import (
 	"github.com/ziondials/go-cdr/logger"
 )
 
-func ParseCUCMCDRs(inputFile string, db *database.DataService) {
+func ParseCUCMCDRs(inputFile string, db *database.DataService, outputDirectory string, deleteOriginal bool) {
 
 	baseFileName := filepath.Base(inputFile)
 
@@ -42,7 +42,7 @@ func ParseCUCMCDRs(inputFile string, db *database.DataService) {
 				logger.Error("Error while writing to database: %s", err.Error())
 			} else {
 				logger.Info("Successfully wrote %s CDRs to database from %s", strconv.Itoa(len(cdrs)), inputFile)
-				err := helpers.ChangeFileNameToCompleteAndMove(inputFile)
+				err := helpers.ChangeFileNameToCompleteAndMoveOrDelete(inputFile, outputDirectory, deleteOriginal)
 				if err != nil {
 					logger.Error("Error while moving file: %s", err.Error())
 				} else {
@@ -51,7 +51,7 @@ func ParseCUCMCDRs(inputFile string, db *database.DataService) {
 			}
 		} else if len(cdrs) == 0 && err == nil {
 			logger.Info("No CDRs found in file: %s", inputFile)
-			err := helpers.ChangeFileNameToCompleteAndMove(inputFile)
+			err := helpers.ChangeFileNameToCompleteAndMoveOrDelete(inputFile, outputDirectory, deleteOriginal)
 			if err != nil {
 				logger.Error("Error while moving file: %s", err.Error())
 			} else {
@@ -59,7 +59,7 @@ func ParseCUCMCDRs(inputFile string, db *database.DataService) {
 			}
 		} else {
 			logger.Error("Error parsing file: %s Error: %s", inputFile, err)
-			err := helpers.ChangeFileNameToFailedAndMove(inputFile)
+			err := helpers.ChangeFileNameToFailedAndMove(inputFile, outputDirectory)
 			if err != nil {
 				logger.Error("Error while moving file: %s", err.Error())
 			} else {
@@ -73,7 +73,7 @@ func ParseCUCMCDRs(inputFile string, db *database.DataService) {
 		cdrs, err := ParseCucmCDRFile(inputFile)
 		if err != nil {
 			logger.Error("Error parsing file: %s Error: %s", inputFile, err)
-			helpers.ChangeFileNameToFailedAndMove(inputFile)
+			helpers.ChangeFileNameToFailedAndMove(inputFile, outputDirectory)
 		}
 
 		if len(cdrs) > 0 && err == nil {
@@ -81,7 +81,7 @@ func ParseCUCMCDRs(inputFile string, db *database.DataService) {
 			err := db.CreateCucmCDRs(cdrs)
 			if err != nil {
 				logger.Error("Error while writing to database: %s", err.Error())
-				err := helpers.ChangeFileNameToFailedAndMove(inputFile)
+				err := helpers.ChangeFileNameToFailedAndMove(inputFile, outputDirectory)
 				if err != nil {
 					logger.Error("Error while moving file: %s", err.Error())
 				} else {
@@ -89,7 +89,7 @@ func ParseCUCMCDRs(inputFile string, db *database.DataService) {
 				}
 			} else {
 				logger.Info("Successfully wrote %s CDRs to database from %s", strconv.Itoa(len(cdrs)), inputFile)
-				err := helpers.ChangeFileNameToCompleteAndMove(inputFile)
+				err := helpers.ChangeFileNameToCompleteAndMoveOrDelete(inputFile, outputDirectory, deleteOriginal)
 				if err != nil {
 					logger.Error("Error while moving file: %s", err.Error())
 				} else {
@@ -98,7 +98,7 @@ func ParseCUCMCDRs(inputFile string, db *database.DataService) {
 			}
 		} else if len(cdrs) == 0 && err == nil {
 			logger.Info("No CDRs found in file: %s", inputFile)
-			err := helpers.ChangeFileNameToCompleteAndMove(inputFile)
+			err := helpers.ChangeFileNameToCompleteAndMoveOrDelete(inputFile, outputDirectory, deleteOriginal)
 			if err != nil {
 				logger.Error("Error while moving file: %s", err.Error())
 			} else {
@@ -106,7 +106,7 @@ func ParseCUCMCDRs(inputFile string, db *database.DataService) {
 			}
 		} else {
 			logger.Error("Error parsing file: %s Error: %s", inputFile, err)
-			err := helpers.ChangeFileNameToFailedAndMove(inputFile)
+			err := helpers.ChangeFileNameToFailedAndMove(inputFile, outputDirectory)
 			if err != nil {
 				logger.Error("Error while moving file: %s", err.Error())
 			} else {

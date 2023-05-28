@@ -55,8 +55,10 @@ type ParserConfig struct {
 }
 
 type DirectoryConfig struct {
-	Path string `mapstructure:"path"`
-	Type string `mapstructure:"type"`
+	Input          string `mapstructure:"input"`
+	Output         string `mapstructure:"output"`
+	Type           string `mapstructure:"type"`
+	DeleteOriginal bool   `mapstructure:"deleteOriginal"`
 }
 
 func SetDefaults() {

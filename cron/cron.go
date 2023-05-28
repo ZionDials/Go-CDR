@@ -33,13 +33,9 @@ func RunCronJobs() {
 
 	parseDirectories := config.GetDirectoriesFromGlobalConfig()
 
-	for _, directory := range parseDirectories {
-		parser.ParseFiles(directory.Path, directory.Type)
-	}
-
 	s.Every(parseInterval).Minutes().Do(func() {
 		for _, directory := range parseDirectories {
-			parser.ParseFiles(directory.Path, directory.Type)
+			parser.ParseFiles(directory.Input, directory.Output, directory.Type, directory.DeleteOriginal)
 		}
 	})
 

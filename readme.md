@@ -40,8 +40,12 @@ logging:
 parser:
   parseInterval: 30 # Interval in minutes to parse files
   directories:
-  - path: D:\CDR\cube_cdr\home\cubecdr\ftp # Path to the CDR files
+  - input: D:\CDR\cube_cdr\home\cubecdr\ftp # Path to the CDR files
+    output: D:\CDR\cube_cdr\home\cubecdr\ftp\processed # Path to move the CDR files after parsing
     type: cube # Type of CDR files (cucm|cube)
-  - path: D:\CDR\cucm_cdr\home\cucmcdr\ftp # Path to the CDR files
+    deleteOriginal: false # Delete original files after parsing
+  - input: D:\CDR\cucm_cdr\home\cucmcdr\ftp # Path to the CDR files
+    output: D:\CDR\cucm_cdr\home\cucmcdr\ftp\processed # Path to move the CDR files after parsing
     type: cucm # Type of CDR files (cucm|cube)
+    deleteOriginal: false # Delete original files after parsing
 ```
