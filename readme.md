@@ -6,7 +6,7 @@ Inserts CDR/CMR records in bulk to improve performance, and utilizes UTC time fo
 ## Usage
 
 ``` bash
-go-cdr --directory "C:\CDR" --cdr_type (cucm|cube) --config "config.yaml"
+go-cdr parse --config "config.yaml"
 ```
 
 ## Limitations
