@@ -3,8 +3,8 @@ module github.com/ziondials/go-cdr
 go 1.20
 
 require (
-	github.com/go-co-op/gocron v1.31.0
-	github.com/google/uuid v1.3.0
+	github.com/go-co-op/gocron v1.35.2
+	github.com/google/uuid v1.3.1
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.16.0
 	go.uber.org/zap v1.26.0
