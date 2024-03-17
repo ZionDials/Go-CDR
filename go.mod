@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/go-co-op/gocron v1.37.0
-	github.com/google/uuid v1.4.0
+	github.com/google/uuid v1.6.0
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.16.0
 	go.uber.org/zap v1.26.0
