@@ -73,7 +73,7 @@ func ParseCucmCMRFile(inputFile string) ([]*models.CucmCmr, error) {
 			logger.Error("Error parsing file: %s Error: %s", inputFile, err)
 		}
 
-		if len(record) >= 47 && lineCount > 2 {
+		if len(record) >= 44 && lineCount > 2 {
 			rawcdrs = append(rawcdrs, &models.RawCucmCmr{
 				Cdrrecordtype:                       &record[0],
 				Globalcallid_Callmanagerid:          &record[1],
@@ -119,17 +119,13 @@ func ParseCucmCMRFile(inputFile string) ([]*models.CucmCmr, error) {
 				Videoonewaydelay_Channel2:           &record[41],
 				Videoreceptionmetrics_Channel2:      &record[42],
 				Videotransmissionmetrics_Channel2:   &record[43],
-				Localsessionid:                      &record[44],
-				Remotesessionid:                     &record[45],
-				Headsetsn:                           &record[46],
-				Headsetmetrics:                      &record[47],
 				FileClusterId:                       &FilenameClusterID,
 				FileNodeId:                          &FilenameNodeID,
 				FileDateTime:                        FilenameDateTime,
 				FileSequenceNumber:                  FilenameSequence,
 			})
 		} else if len(record) != 1 && lineCount > 2 {
-			logger.Error("Error parsing CDR: %s Found %s fields instead of 48", inputFile, strconv.Itoa(len(record)))
+			logger.Error("Error parsing CDR: %s Found %s fields instead of equal to or greater than 44", inputFile, strconv.Itoa(len(record)))
 		}
 	}
 

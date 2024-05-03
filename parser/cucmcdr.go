@@ -73,7 +73,7 @@ func ParseCucmCDRFile(inputFile string) ([]*models.CucmCdr, error) {
 			logger.Error("Error parsing file: %s Error: %s", inputFile, err)
 		}
 
-		if len(record) == 133 && lineCount > 2 {
+		if len(record) >= 129 && lineCount > 2 {
 			rawcdrs = append(rawcdrs, &models.RawCucmCdr{
 				Cdrrecordtype:                           &record[0],
 				Globalcallid_Callmanagerid:              &record[1],
@@ -210,7 +210,7 @@ func ParseCucmCDRFile(inputFile string) ([]*models.CucmCdr, error) {
 				FileSequenceNumber:                      FilenameSequence,
 			})
 		} else if len(record) != 1 && lineCount > 2 {
-			logger.Error("Error parsing CDR: %s Found %s fields instead of 132", inputFile, strconv.Itoa(len(record)))
+			logger.Error("Error parsing CDR: %s Found %s fields instead of greater than or equal to 129", inputFile, strconv.Itoa(len(record)))
 		}
 	}
 
