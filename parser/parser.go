@@ -31,7 +31,7 @@ func ParseFiles(inputDirectory string, outputDirectory string, fileType string, 
 		os.Exit(1)
 	}
 
-	logger.Info("Parsing %d files in directory: %s", len(files), inputDirectory)
+	logger.Info("Parsing files in directory: %s", inputDirectory)
 
 	// TimestampedFilename := fileType + "_" + helpers.FilenameFriendlyTimeStamp() + ".csv"
 
@@ -64,5 +64,5 @@ func ParseFiles(inputDirectory string, outputDirectory string, fileType string, 
 		}
 	}
 
-	logger.Info("Finished parsing %d files in directory: %s", len(files), inputDirectory)
+	logger.Info("Finished parsing files in directory: %s", inputDirectory)
 }
