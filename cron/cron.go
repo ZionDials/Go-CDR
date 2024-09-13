@@ -26,7 +26,7 @@ import (
 
 func RunCronJobs() {
 
-	database.InitDB()
+	db := database.InitDB()
 	s := gocron.NewScheduler(time.UTC)
 
 	parseInterval := config.GetParserFromGlobalConfig().ParseInterval
@@ -35,7 +35,7 @@ func RunCronJobs() {
 
 	s.Every(parseInterval).Minutes().Do(func() {
 		for _, directory := range parseDirectories {
-			parser.ParseFiles(directory.Input, directory.Output, directory.Type, directory.DeleteOriginal)
+			parser.ParseFiles(directory.Input, directory.Output, directory.Type, directory.DeleteOriginal, db)
 		}
 	})
 

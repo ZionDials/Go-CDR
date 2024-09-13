@@ -23,7 +23,7 @@ import (
 	"github.com/ziondials/go-cdr/logger"
 )
 
-func ParseFiles(inputDirectory string, outputDirectory string, fileType string, deleteOriginal bool) {
+func ParseFiles(inputDirectory string, outputDirectory string, fileType string, deleteOriginal bool, db *database.DataService) {
 	// Get a list of files in the input directory
 	files, err := os.ReadDir(inputDirectory)
 	if err != nil {
@@ -31,7 +31,7 @@ func ParseFiles(inputDirectory string, outputDirectory string, fileType string, 
 		os.Exit(1)
 	}
 
-	db := database.InitDB()
+	logger.Info("Parsing %d files in directory: %s", len(files), inputDirectory)
 
 	// TimestampedFilename := fileType + "_" + helpers.FilenameFriendlyTimeStamp() + ".csv"
 
@@ -63,4 +63,6 @@ func ParseFiles(inputDirectory string, outputDirectory string, fileType string, 
 			}
 		}
 	}
+
+	logger.Info("Finished parsing %d files in directory: %s", len(files), inputDirectory)
 }
