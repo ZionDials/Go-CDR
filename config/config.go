@@ -72,7 +72,7 @@ func SetDefaults() {
 
 	// Set defaults for the DatabaseConfig
 	viper.SetDefault("database.autoMigrate", true)
-	viper.SetDefault("database.driver", "sqlite")
+	// viper.SetDefault("database.driver", "sqlite")
 	viper.SetDefault("database.path", "./go-cdr/db/go-cdr.db")
 	viper.SetDefault("database.limit", 100)
 
