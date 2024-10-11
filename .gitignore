@@ -36,3 +36,6 @@ examples/*
 .vscode/*
 
 dist/
+
+# Test Data
+/data

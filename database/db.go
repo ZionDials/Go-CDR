@@ -23,8 +23,7 @@ import (
 	"github.com/ziondials/go-cdr/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
-
-	// "gorm.io/driver/sqlite"
+	"gorm.io/driver/sqlite"
 	"gorm.io/driver/sqlserver"
 	"gorm.io/gorm"
 	glogger "gorm.io/gorm/logger"
@@ -84,19 +83,18 @@ func InitDB() *DataService {
 			migrate(db)
 		}
 		return &DataService{Session: db, Config: dbConfig}
-	/* case "sqlite":
-	db, err := gorm.Open(sqlite.Open(dbConfig.Path), &gorm.Config{
-		Logger: glogger.Default.LogMode(glogger.Silent),
-	})
-	if err != nil {
-		logger.Panic("Database Connection %s\n", err)
-	}
-	logger.Info("Connected to SQLite database.")
-	if dbConfig.AutoMigrate {
-		migrate(db)
-	}
-	return &DataService{Session: db, Config: dbConfig}
-	*/
+	case "sqlite":
+		db, err := gorm.Open(sqlite.Open(dbConfig.Path), &gorm.Config{
+			Logger: glogger.Default.LogMode(glogger.Silent),
+		})
+		if err != nil {
+			logger.Panic("Database Connection %s\n", err)
+		}
+		logger.Info("Connected to SQLite database.")
+		if dbConfig.AutoMigrate {
+			migrate(db)
+		}
+		return &DataService{Session: db, Config: dbConfig}
 	case "":
 		logger.Fatal("No database driver specified.\n")
 		return nil
