@@ -12,7 +12,7 @@ go-cdr parse --config "config.yaml"
 ## Limitations
 
 * Only supports CUCM/CCM and CUBE CDR/CMR files
-* Only supports PostgreSQL, MySQL, and Microsoft SQL Server databases
+* Only supports SQLite, PostgreSQL, MySQL, and Microsoft SQL Server databases
 * Only supports CDR/CMR files in CSV format
 * Will parse directories in single-threaded mode, i.e. one directory at a time
 
