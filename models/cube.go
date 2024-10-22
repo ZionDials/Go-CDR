@@ -150,11 +150,11 @@ type CubeCDRs []*CubeCDR
 type CubeCDR struct {
 	ID                  string
 	InvalidNTPReference bool
-	Hostname            *string `gorm:"uniqueIndex:cube_cdr_index"`
+	Hostname            *string // `gorm:"uniqueIndex:cube_cdr_index"`
 	Filename            *string
 	FileTimestamp       *int64
 	RecordTimestamp     *int64
-	CallId              *int64 `gorm:"uniqueIndex:cube_cdr_index"`
+	CallId              *int64 // `gorm:"uniqueIndex:cube_cdr_index"`
 	CdrType             *int64
 
 	AccountCode                     *string
@@ -204,8 +204,8 @@ type CubeCDR struct {
 	FaxrelayStopTime                *string
 	FaxrelayTxPackets               *int64
 	FeatureId                       *string
-	FeatureIdField1                 *string `gorm:"uniqueIndex:cube_cdr_index"`
-	FeatureIdField2                 *int64  `gorm:"uniqueIndex:cube_cdr_index"`
+	FeatureIdField1                 *string // `gorm:"uniqueIndex:cube_cdr_index"`
+	FeatureIdField2                 *int64  // `gorm:"uniqueIndex:cube_cdr_index"`
 	FeatureOpStatus                 *string
 	FeatureOpTime                   *string
 	FeatureOperation                *string
@@ -227,7 +227,7 @@ type CubeCDR struct {
 	GwRxdCgn                        *string
 	GwRxdRdn                        *string
 	H323CallOrigin                  *string
-	H323ConfId                      *string `gorm:"uniqueIndex:cube_cdr_index"`
+	H323ConfId                      *string // `gorm:"uniqueIndex:cube_cdr_index"`
 	H323ConnectTime                 *int64
 	H323DisconnectCause             *string
 	H323DisconnectTime              *int64
@@ -256,7 +256,7 @@ type CubeCDR struct {
 	IpPbxMode                       *string
 	IpPhoneInfo                     *string
 	LatePackets                     *int64
-	LegType                         *int `gorm:"uniqueIndex:cube_cdr_index"`
+	LegType                         *int // `gorm:"uniqueIndex:cube_cdr_index"`
 	LocalHostname                   *string
 	LogicalIfIndex                  *int64
 	LostPackets                     *int64

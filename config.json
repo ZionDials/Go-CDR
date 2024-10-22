@@ -1,0 +1,32 @@
+{
+  "database": {
+    "autoMigrate": true,
+    "database": "QA_CUCM_CDR",
+    "driver": "mssql",
+    "host": "hostname",
+    "limit": 100,
+    "password": "pass",
+    "port": 1433,
+    "username": "user",
+    "SSL": "require"
+  },
+  "logging": {
+    "compress": false,
+    "level": "debug",
+    "maxAge": 60,
+    "maxSize": 1000,
+    "name": "go-cdr.log",
+    "path": "./logs"
+  },
+  "parser": {
+    "parseInterval": 30,
+    "directories": [
+      {
+        "input": "G:\\SFTP_OpenSSH_Root\\QA_CUCM_CDR",
+        "output": "G:\\SFTP_OpenSSH_Root\\QA_CUCM_CDR_Processed",
+        "type": "cucm",
+        "deleteOriginal": false
+      }
+    ]
+  }
+}
