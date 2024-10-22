@@ -39,3 +39,7 @@ dist/
 
 # Test Data
 /data
+
+# Configs
+*.json
+*.yaml
